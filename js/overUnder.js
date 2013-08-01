@@ -43,56 +43,64 @@ Changelog
 		}
 		options = $.extend(options, additionalOptions ); //- override default options with user-supplied options
 		
-		//- create a stylesheet for these styles (so we don't have to worry about javascript DOM ready delays)
-		//var sheet = (function() {
-			// Create the <style> tag
-			var style = document.createElement("style");
+		//- create a stylesheet for these styles (so we don't have to worry about reading the DOM constantly)
+		
+		var style = document.createElement("style");
 
-			// Add a media (and/or media query) here if you'd like!
-			style.setAttribute("media", "screen, projection");
-			// style.setAttribute("media", "@media only screen and (max-width : 1024px)");
-			style.type = 'text/css';
+		// Add a media (and/or media query) here if you'd like!
+		style.setAttribute("media", "screen, projection");
+		// style.setAttribute("media", "@media only screen and (max-width : 1024px)");
+		style.type = 'text/css';
 
-			// WebKit hack :(
-			style.appendChild(document.createTextNode(".overUnder { }"));
+		// WebKit hack :(
+		style.appendChild(document.createTextNode(".overUnder { }"));
 
-			// Add the <style> element to the page
-			document.head.appendChild(style);
+		// Add the <style> element to the page
+		document.head.appendChild(style);
 
-			//return style; //.sheet || style.styleSheet;
-		//})();
 		var sheet = style.sheet;
 
-		console.log(sheet);
-
 		// Under
-		$(this).find("[class^='under']").each(function() {
+		$(this).find("[class*='under']").each(function() {
 			
 			var $this = $(this); //- get this variable for later
-			var breakpoint = $this.attr("class").replace("under","");
-
-			//- add rule to the newly created stylesheet with a media query based on the breakpoint
-			if(sheet.insertRule) {
-				sheet.insertRule("@media only screen and (min-width : "+breakpoint+"px) { .under"+breakpoint+" { display: none; } }", 1);
-				//sheet.appendChild(document.createTextNode("@media only screen and (min-width : "+breakpoint+"px) { .under"+breakpoint+" { display: none; } }"));
-			} else {
-				//sheet.addRule(selector, rules, index); // TODO: figure this out... it's for IE to work
-			}
+			
+			var classAttribute = $this.attr("class");
+			$(classAttribute.split(" ")).each(function() {
+				var breakpoint = this.replace("under","");
+				
+				if (breakpoint == parseInt(this.match(/(\d+)$/)[0])) {
+					//- add rule to the newly created stylesheet with a media query based on the breakpoint
+					if(sheet.insertRule) {
+						sheet.insertRule("@media only screen and (min-width : "+breakpoint+"px) { .under"+breakpoint+" { display: none; } }", 1);
+						sheet.insertRule("@media only screen and (max-width : "+breakpoint+"px) { .under"+breakpoint+" { display: block; } }", 1);
+					} else {
+						//sheet.addRule(selector, rules, index); // TODO: figure this out... it's for IE to work
+					}
+				}
+			});
 								
 		});
 
 		// Over
-		$(this).find("[class^='over']").each(function() {
+		$(this).find("[class*='over']").each(function() {
 			
 			var $this = $(this); //- get this variable for later
-			var breakpoint = $this.attr("class").replace("over","");
+			
+			var classAttribute = $this.attr("class");
+			$(classAttribute.split(" ")).each(function() {
+				var breakpoint = this.replace("over","");
 
-			//- add rule to the newly created stylesheet with a media query based on the breakpoint
-			if(sheet.insertRule) {
-				sheet.insertRule("@media only screen and (max-width : "+breakpoint+"px) { .over"+breakpoint+" { display: none; } }", 1);
-			} else {
-				//sheet.addRule(selector, rules, index); // TODO: figure this out... it's for IE to work
-			}
+				if (breakpoint == parseInt(this.match(/(\d+)$/)[0])) {
+					//- add rule to the newly created stylesheet with a media query based on the breakpoint
+					if(sheet.insertRule) {
+						sheet.insertRule("@media only screen and (max-width : "+breakpoint+"px) { .over"+breakpoint+" { display: none; } }", 1);
+						sheet.insertRule("@media only screen and (min-width : "+breakpoint+"px) { .over"+breakpoint+" { display: block; } }", 1);
+					} else {
+						//sheet.addRule(selector, rules, index); // TODO: figure this out... it's for IE to work
+					}
+				}
+			});
 								
 		});
 		
