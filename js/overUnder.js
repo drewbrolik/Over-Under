@@ -34,6 +34,12 @@ Changelog
 8/1/13 Modifed core functionality to insert a  stylesheet into head instead of using javascript to read window size constantly (2.0.0)
 */
 
+/***********
+
+Thanks to David Walsh for his great tutorial on creating stylesheets with Javascript http://davidwalsh.name/add-rules-stylesheets
+
+************/
+
 (function($) {
 
 	$.fn.overUnder = function(additionalOptions) {
