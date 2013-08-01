@@ -73,7 +73,7 @@ Changelog
 					//- add rule to the newly created stylesheet with a media query based on the breakpoint
 					if(sheet.insertRule) {
 						sheet.insertRule("@media only screen and (min-width : "+breakpoint+"px) { .under"+breakpoint+" { display: none; } }", 1);
-						sheet.insertRule("@media only screen and (max-width : "+breakpoint+"px) { .under"+breakpoint+" { display: block; } }", 1);
+						//sheet.insertRule("@media only screen and (max-width : "+breakpoint+"px) { .under"+breakpoint+" { display: block; } }", 1);
 					} else {
 						//sheet.addRule(selector, rules, index); // TODO: figure this out... it's for IE to work
 					}
@@ -95,7 +95,7 @@ Changelog
 					//- add rule to the newly created stylesheet with a media query based on the breakpoint
 					if(sheet.insertRule) {
 						sheet.insertRule("@media only screen and (max-width : "+breakpoint+"px) { .over"+breakpoint+" { display: none; } }", 1);
-						sheet.insertRule("@media only screen and (min-width : "+breakpoint+"px) { .over"+breakpoint+" { display: block; } }", 1);
+						//sheet.insertRule("@media only screen and (min-width : "+breakpoint+"px) { .over"+breakpoint+" { display: block; } }", 1);
 					} else {
 						//sheet.addRule(selector, rules, index); // TODO: figure this out... it's for IE to work
 					}
