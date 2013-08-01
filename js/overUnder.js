@@ -1,7 +1,7 @@
 /*
 Over Under jQuery Plugin
-Version 1.0.0
-Jan 21st, 2013
+Version 2.0.0
+Aug 1st, 2013
 
 Documentation: http://drewtotango.com/hideUnder
 Repository: https://github.com/drewbrolik/Hide-Under
@@ -31,6 +31,7 @@ along with Over Under.  If not, see <http://www.gnu.org/licenses/>.
 /*
 Changelog
 1/21/13 Initial plugin (1)
+8/1/13 Modifed core functionality to insert a  stylesheet into head instead of using javascript to read window size constantly (2.0.0)
 */
 
 (function($) {
@@ -53,7 +54,7 @@ Changelog
 			style.type = 'text/css';
 
 			// WebKit hack :(
-			style.appendChild(document.createTextNode(""));
+			style.appendChild(document.createTextNode(".overUnder { }"));
 
 			// Add the <style> element to the page
 			document.head.appendChild(style);
