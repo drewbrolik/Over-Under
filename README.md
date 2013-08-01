@@ -24,3 +24,15 @@ To only show an element when the browser is over 500 pixels and under 800 pixels
 ```html
 <div class="over500 under800">This only shows up when the window is over 500 pixels and under 800.</div>
 ```
+
+### How To
+
+First, include the plugin in the head of your document (or at the end if you prefer).
+```html
+<script type="text/javascript" src="js/overUnder.js"></script>
+```
+
+Then, call the plugin on $("body"). To ensure the plugin fires as early as possible, call it in a script block at the very end of your file, just before closing the body tag. You don't need to wrap this in a DOM ready function, as long as you put it at the very end of your html.
+```javascript
+$("body").overUnder();
+```
